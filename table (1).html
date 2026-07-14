@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Premier League Table</title>
+    <link rel="stylesheet" href="table.css">
+</head>
+<body>
+
+    <h1>🏆 Interactive Premier League Standings</h1>
+
+    <div class="table-container">
+        <table id="leagueTable">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Club</th>
+                    <th>Pl</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GD</th>
+                    <th>Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Row 1 -->
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" value="Arsenal"></td>
+                    <td><input type="number" class="played" value="0" min="0"></td>
+                    <td><input type="number" class="wins" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="draws" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="losses" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="gd" value="0"></td>
+                    <td class="points-cell">0</td>
+                </tr>
+                <!-- Row 2 -->
+                <tr>
+                    <td>2</td>
+                    <td><input type="text" value="Manchester City"></td>
+                    <td><input type="number" class="played" value="0" min="0"></td>
+                    <td><input type="number" class="wins" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="draws" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="losses" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="gd" value="0"></td>
+                    <td class="points-cell">0</td>
+                </tr>
+                <!-- Row 3 -->
+                <tr>
+                    <td>3</td>
+                    <td><input type="text" value="Liverpool"></td>
+                    <td><input type="number" class="played" value="0" min="0"></td>
+                    <td><input type="number" class="wins" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="draws" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="losses" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="gd" value="0"></td>
+                    <td class="points-cell">0</td>
+                </tr>
+                <!-- Row 4 -->
+                <tr>
+                    <td>4</td>
+                    <td><input type="text" value="Chelsea"></td>
+                    <td><input type="number" class="played" value="0" min="0"></td>
+                    <td><input type="number" class="wins" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="draws" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="losses" value="0" min="0" oninput="updateTable()"></td>
+                    <td><input type="number" class="gd" value="0"></td>
+                    <td class="points-cell">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="btn-container">
+        <button onclick="sortTable()">Sort Table By Points</button>
+    </div>
+    <div class="end">
+<footer>
+    <p><strong>Design by</strong><span><i class="fa-solid fa-face-grin"></i> Abdurehim sultan</span></p>
+</footer>
+</div>
+    <script>
+        function updateTable() {
+            const rows = document.querySelectorAll("#leagueTable tbody tr");
+
+            rows.forEach(row => {
+                const wins = parseInt(row.querySelector(".wins").value)  0;
+                const draws = parseInt(row.querySelector(".draws").value)  0;
+                const losses = parseInt(row.querySelector(".losses").value)  0;
+
+                // Calculate Played Games (W + D + L)
+                const played = wins + draws + losses;
+                row.querySelector(".played").value = played;
+
+                // Calculate Points (3 for Win, 1 for Draw, 0 for Loss)
+                const points = (wins * 3) + (draws * 1);
+                row.querySelector(".points-cell").textContent = points;
+            });
+        }
+
+        function sortTable() {
+            updateTable(); // Ensure data is updated before sorting
+            const table = document.getElementById("leagueTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            // Sort rows based on points, then goal difference (GD)
+            rows.sort((a, b) => {
+                const pointsA = parseInt(a.querySelector(".points-cell").textContent)  0;
+                const pointsB = parseInt(b.querySelector(".points-cell").textContent)  0;
+                
+                if (pointsB !== pointsA) {
+                    return pointsB - pointsA; // Higher points go first
+                }
+
+                const gdA = parseInt(a.querySelector(".gd").value)  0;
+                const gdB = parseInt(b.querySelector(".gd").value) || 0;
+                return gdB - gdA; // Higher goal difference breaks ties
+            });
+
+            // Re-append sorted rows and fix the Position number
+            rows.forEach((row, index) => {
+                row.cells[0].textContent = index + 1; // Update Pos number
+                tbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

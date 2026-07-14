@@ -1,0 +1,88 @@
+        *body{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #38003c; /* Premier League Purple */
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+       }
+           h1{ color: #00ff87; /* Premier League Green */
+            margin-bottom: 20px;
+        }
+        .table-container {
+            background-color: #fff;
+            color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 900px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #38003c;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        tr:hover {
+            background-color: #d12a2a3f;
+        }
+        input[type="number"], input[type="text"] {
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 150px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .points-cell {
+            font-weight: bold;
+            color: #38003c;
+        }
+        .btn-container {
+            margin-top: 15px;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .end{
+            text-align: center;
+            text-size-adjust: calc(34);
+            text-decoration:dashed;
+            text-shadow: #38003c5e;
+            color: rgb(219, 127, 255);
+            font-size:23px ;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        button {
+            background-color:aqua;
+            color: #38003c;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #02e077;
+            transform: scale(1.02);
+        }
+    
